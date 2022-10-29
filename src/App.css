@@ -55,3 +55,13 @@ tr {
 .card {
   width: 18rem;
 }
+
+#all-items {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
