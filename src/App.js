@@ -3,9 +3,8 @@ import Bookings from "./components/Bookings";
 import Heading from "./components/Heading";
 import TouristInfoCards from "./components/TouristInfoCards";
 import Footer from "./components/Footer";
-import SearchResult from "./components/SearchResults";
-import fakeBookings from "./data/fakeBookings.json";
 import "./App.css";
+import Restaurant from "./components/Restaurant";
 
 const hotelInfo = [
   "123 Fake Street, London, E1 4UD",
@@ -19,9 +18,7 @@ const App = () => {
       <Heading />
       <TouristInfoCards />
       <Bookings />
-
-      <SearchResult bookingsDetail={fakeBookings} />
-
+      <Restaurant />
       <Footer hotelInfo={hotelInfo} />
     </div>
   );

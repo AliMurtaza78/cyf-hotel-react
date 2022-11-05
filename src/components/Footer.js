@@ -5,8 +5,12 @@ const Footer = prop => {
   return (
     <footer>
       <ul className="list-group">
-        {HotelInfo.map(info => {
-          return <li className="list-group-item bg-secondary">{info}</li>;
+        {HotelInfo.map((info, index) => {
+          return (
+            <li key={index} className="list-group-item bg-secondary">
+              {info}
+            </li>
+          );
         })}
       </ul>
     </footer>

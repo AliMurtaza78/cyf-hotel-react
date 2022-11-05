@@ -65,3 +65,12 @@ img {
   max-width: 100%;
   max-height: 100%;
 }
+
+.restaurant-ul {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.highlight {
+  background-color: rgb(255, 180, 180);
+}

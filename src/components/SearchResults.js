@@ -1,8 +1,17 @@
 import moment from "moment/moment";
-import React from "react";
+import ReactDOM from "react-dom/client";
+import React, { useState } from "react";
+import "../App.css";
 
 const SearchResult = prop => {
-  const bookingsDetails = prop.bookingsDetail;
+  const bookingsDetails = prop.results;
+
+  const [clickedRow, SetClickedRow] = useState();
+  function handleRowClicked(index) {
+    console.log("clicked");
+
+    SetClickedRow(index);
+  }
 
   return (
     <table className="table">
@@ -19,22 +28,27 @@ const SearchResult = prop => {
           <th scope="col">Nights Stay</th>
         </tr>
       </thead>
-      {bookingsDetails.map(e => {
+      {bookingsDetails.map((e, index) => {
         let myDate = moment(e.checkOutDate).diff(e.checkInDate, "days");
-
         return (
-          <tr>
-            <th>{e.id}</th>
-            <td>{e.title}</td>
-            <td>{e.firstName}</td>
-            <td>{e.surname}</td>
-            <td>{e.email}</td>
-            <td>{e.roomId}</td>
-            <td>{e.checkInDate}</td>
-            <td>{e.checkOutDate}</td>
-            <td>{myDate}</td>
-            <td />
-          </tr>
+          <tbody>
+            <tr
+              key={index}
+              onClick={() => handleRowClicked(index)}
+              className={clickedRow == index ? "highlight" : null}
+            >
+              <th>{e.id}</th>
+              <td>{e.title}</td>
+              <td>{e.firstName}</td>
+              <td>{e.surname}</td>
+              <td>{e.email}</td>
+              <td>{e.roomId}</td>
+              <td>{e.checkInDate}</td>
+              <td>{e.checkOutDate}</td>
+              <td>{myDate}</td>
+              <td />
+            </tr>
+          </tbody>
         );
       })}
     </table>
