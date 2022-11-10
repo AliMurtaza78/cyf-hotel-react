@@ -7,6 +7,7 @@ const SearchResult = prop => {
   const bookingsDetails = prop.results;
 
   const [clickedRow, SetClickedRow] = useState();
+
   function handleRowClicked(index) {
     console.log("clicked");
 
@@ -26,6 +27,7 @@ const SearchResult = prop => {
           <th scope="col">Check in date</th>
           <th scope="col">Check out date</th>
           <th scope="col">Nights Stay</th>
+          <th scope="col">Profiles</th>
         </tr>
       </thead>
       {bookingsDetails.map((e, index) => {
@@ -46,6 +48,12 @@ const SearchResult = prop => {
               <td>{e.checkInDate}</td>
               <td>{e.checkOutDate}</td>
               <td>{myDate}</td>
+              <td>
+                <button type="button" className="btn btn-primary">
+                  Show Profile
+                </button>
+              </td>
+
               <td />
             </tr>
           </tbody>
