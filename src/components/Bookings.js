@@ -1,37 +1,60 @@
 import React, { useEffect, useState } from "react";
 import Search from "./Search.js";
 import SearchResults from "./SearchResults.js";
-import FakeBookings from "../data/fakeBookings.json";
-import CustomerProfile from "./CustomerProfile";
 
 const Bookings = () => {
-  const [bookings, setBooking] = useState([]);
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
   const search = searchVal => {
     console.info("TO DO!", searchVal);
 
-    bookings.filter(e => {
-      if (searchVal === e.firstName) {
-        return e.firstName;
-      } else if (searchVal === e.surname) {
-        return e.surname;
-      } else {
-        return bookings;
-      }
-    });
+    const filterBookings = bookings.filter(
+      e => searchVal === e.firstName || searchVal === e.surname
+    );
+
+    setBookings(filterBookings);
   };
 
   useEffect(() => {
-    fetch("https://cyf-react.glitch.me")
-      .then(response => response.json())
-      .then(data => setBooking(data));
+    setLoading(true);
+    fetch("https://cyf-react.glitch.me/error")
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("Some bad thing happend");
+        }
+        return res.json();
+      })
+      .then(
+        data => {
+          setBookings(data);
+          setLoading(false);
+        },
+        error => {
+          setError(error.toString());
+          setLoading(false);
+        }
+      );
   }, []);
 
   return (
     <div className="App-content">
       <div className="container">
         <Search search={search} />
-        <SearchResults results={bookings} />
-        {/* <CustomerProfile /> */}
+        {loading ? (
+          <p className="loadingImg">
+            <img
+              src="https://blog.teamtreehouse.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif"
+              height={100}
+              width="100px"
+            />
+          </p>
+        ) : error != "" ? (
+          <p>{error}</p>
+        ) : (
+          <SearchResults results={bookings} />
+        )}
       </div>
     </div>
   );
