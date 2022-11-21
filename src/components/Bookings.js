@@ -19,7 +19,7 @@ const Bookings = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://cyf-react.glitch.me/error")
+    fetch("https://cyf-react.glitch.me/delayed")
       .then(res => {
         if (!res.ok) {
           throw new Error("Some bad thing happend");
